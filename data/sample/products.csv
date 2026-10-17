@@ -1,0 +1,21 @@
+product_id,product_name,category,list_price
+P001,Product 1,Hardware,40.56
+P002,Product 2,Software,121.31
+P003,Product 3,Services,47.34
+P004,Product 4,Services,13.49
+P005,Product 5,Services,357.37
+P006,Product 6,Hardware,200.7
+P007,Product 7,Hardware,131.87
+P008,Product 8,Services,164.31
+P009,Product 9,Services,144.93
+P010,Product 10,Services,399.57
+P011,Product 11,Software,148.44
+P012,Product 12,Services,156.15
+P013,Product 13,Services,300.67
+P014,Product 14,Services,258.35
+P015,Product 15,Software,291.74
+P016,Product 16,Services,44.06
+P017,Product 17,Software,219.38
+P018,Product 18,Hardware,121.45
+P019,Product 19,Hardware,64.09
+P020,Product 20,Services,261.11
