@@ -5,8 +5,8 @@ Read CLAUDE.md first. It has the rules and the context behind them.
 ## Get running in five minutes
 
 ```bash
-git clone https://github.com/Danorete/BIT-Microsoft-Hackathon
-cd BIT-Microsoft-Hackathon
+git clone https://github.com/Danorete/HackATL-VibeCoders
+cd HackATL-VibeCoders
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 pytest
