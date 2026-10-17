@@ -49,6 +49,7 @@ Only synthetic data goes in `data/sample`. Do not load data from any past employ
 
 | File | Purpose |
 | --- | --- |
+| CONTRIBUTING.md | Setup and how we work together |
 | docs/TEAM_LANES.md | Who owns what, mapped to the judging rubric |
 | docs/EVIDENCE_LOG.md | Findings versus assumptions, interview script |
 | docs/PITCH_OUTLINE.md | Five minute pitch with demo inside the clock |
