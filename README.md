@@ -24,6 +24,7 @@ Judges are asked to tell these apart, so we label everything. Update this table 
 | Sensitive field detection | Working | Rule based and auditable, no model involved |
 | Question redaction before sending | Working | Emails, SSNs, phones, cards, API keys |
 | Cited answers from a model | Working with an API key | Offline keyword mode otherwise (Simulated) |
+| Source view (open a cited table or column, flags citations not in the data) | Working | Sample values hidden for sensitive columns |
 | Manager view | Planned | Mockup only |
 | Real company data connectors | Planned | Demo uses synthetic data only |
 

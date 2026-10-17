@@ -82,3 +82,18 @@ def test_live_mode_sends_only_redacted_question():
     assert result.mode == "live"
     sent = client.sent["messages"][0]["content"]
     assert "912-34-5678" not in sent
+
+
+def test_sources_resolve_and_flag_unknown():
+    from onboarding_copilot.profiler import load_dataset, profile_dataset
+    from onboarding_copilot.sources import resolve_sources
+
+    profiles = profile_dataset(load_dataset("data/sample"))
+    text = "Orders join on [orders.customer_id], see [employees.ssn], [orders], and [orders.nope]. [masked]"
+    by_ref = {s.ref: s for s in resolve_sources(text, profiles)}
+
+    assert by_ref["orders.customer_id"].found and by_ref["orders.customer_id"].samples
+    assert by_ref["employees.ssn"].sensitive_kinds and by_ref["employees.ssn"].samples is None
+    assert by_ref["orders"].found and by_ref["orders"].columns
+    assert not by_ref["orders.nope"].found
+    assert "masked" not in by_ref

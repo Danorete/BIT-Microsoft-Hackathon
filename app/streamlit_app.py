@@ -11,6 +11,7 @@ import streamlit as st
 from onboarding_copilot.agent import answer_question
 from onboarding_copilot.orientation import build_orientation
 from onboarding_copilot.profiler import find_relationships, load_dataset, profile_dataset
+from onboarding_copilot.sources import resolve_sources
 
 DEFAULT_DATA = Path(__file__).resolve().parent.parent / "data" / "sample"
 
@@ -82,6 +83,31 @@ with tab_ask:
             st.warning(f"Sensitive {flag.kind} found in your message and removed. {flag.advice}")
         st.markdown(result.text)
         st.caption(f"Answer mode: {result.mode}. Citations in [table.column] form point to the schema.")
+
+        sources = resolve_sources(result.text, profiles)
+        if sources:
+            st.subheader("Check the sources")
+            for src in sources:
+                if not src.found:
+                    st.error(f"`{src.ref}` is not in this dataset. Treat that part of the answer as unverified.")
+                    continue
+                with st.expander(f"{src.ref}"):
+                    if src.column is None:
+                        st.write(f"Table with {src.rows} rows. Columns: {', '.join(src.columns)}")
+                        continue
+                    st.write(
+                        f"Type `{src.dtype}`, {src.null_pct}% empty, {src.distinct} distinct values, "
+                        f"{src.rows} rows in `{src.table}`."
+                    )
+                    if src.sensitive_kinds:
+                        st.warning(
+                            f"Sensitive ({', '.join(src.sensitive_kinds)}). Sample values are hidden. "
+                            "Ask the data owner before using this column."
+                        )
+                    else:
+                        st.write("Example values: " + ", ".join(f"`{v}`" for v in src.samples))
+        elif result.mode == "live":
+            st.info("This answer cites no sources. Treat it as unverified.")
 
 with tab_manager:
     st.caption("Status: Planned (mockup only, no live data)")
